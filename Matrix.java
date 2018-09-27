@@ -70,27 +70,55 @@ public class Matrix {
 
     public boolean isRowZero(int r) {
         //Return true jika baris r semuanya 0
-        for (int i = 0; i < nKol; i++) {
-            if (this.data[r][i] != 0) {
-                return false;
-            }
+        int i=0;
+        while((this.data[r][i]==0)&&i<this.nKol-1){
+            i++;
         }
-        return true;
+        if (this.data[r][i]==0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public int getLeadCoef(int r)
     {
-        // return index dari leading coeficient baris r
-        for (int i = 0; i < nKol; i++) {
-            if(this.data[r][i] != 0)
-            {
-                return i;
+        //return index leading point, jika tidak ketemu return nkol
+        boolean found=false;
+        int i=0;
+        while((i<this.nKol)&&!found){
+            if(this.data[r][i]!=0){
+                found=true;
+            }else{
+                i++;
             }
         }
-        return nKol;  //baris isinya 0 semua
+        if (found){
+            return i;
+        }else{
+            return this.nKol;
+        }
     }
+
+    public void sortMatrix(){
+        int i,j;
+        if(this.nBrs>1) {
+            for (i = 0; i < this.nBrs - 1; i++) {
+                int brsMax=i;
+                for (j = i + 1; j < this.nBrs; j++) {
+                    int cidxLeadCoef = this.getLeadCoef(j);
+                    if(cidxLeadCoef<this.getLeadCoef(brsMax)){
+                        brsMax=j;
+                    }
+                }
+                this.tukarBaris(i,brsMax);
+            }
+        }
+    }
+
     public void gauss() {
         //Melakukan algoritma gauss pada matrix ini
+        this.sortMatrix();
         for (int i = 0; i < nBrs - 1; i++) {
             //cek apakah baris 0
             if (!this.isRowZero(i)) {
@@ -99,15 +127,16 @@ public class Matrix {
                 float leadCoef = this.data[i][idxLeadCoef];
                 //manipulasi semua baris di bawahnya
                 for (int j = i + 1; j < nBrs; j++) {
-                    float pengali = -1 * this.data[j][idxLeadCoef] / leadCoef;
-                    this.plusBaris(j, pengali, i);
-                    //Bagi baris ini  dengan lead coef baris ini juga
-                    int idxLeadBarisJ = this.getLeadCoef(j);
-                    float leadCoefJ = this.data[j][idxLeadBarisJ];
-                    this.kaliBaris(j,1/leadCoefJ);
+                    if (!this.isRowZero(j)) {
+                        float pengali = -1 * this.data[j][idxLeadCoef] / leadCoef;
+                        this.plusBaris(j, pengali, i);
+                        //Bagi baris ini  dengan lead coef baris ini juga
+                        int idxLeadBarisJ = this.getLeadCoef(j);
+                        float leadCoefJ = this.data[j][idxLeadBarisJ];
+                        this.kaliBaris(j,1/leadCoefJ);
+                    }
                 }
             }
         }
-        //
     }
 }
