@@ -297,4 +297,22 @@ public class Matrix {
             }
         }
     }
+
+    public void gaussJordan(){
+        this.gauss();
+        int i,j;
+        for (i=nBrs-1;i>0;i--){
+            if(!this.isRowZero(i)) {
+                int idxLeadCoef = this.getLeadCoef(i);
+                float leadCoef = this.data[i][idxLeadCoef];
+                for (j = i - 1; j >= 0; j--) {
+                    if(!this.isRowZero(j)) {
+                        float pengali = -1 * this.data[j][idxLeadCoef];
+                        this.plusBaris(j, pengali, i);
+                    }
+                }
+            }
+        }
+
+    }
 }

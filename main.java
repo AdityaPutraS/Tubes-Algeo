@@ -1,17 +1,44 @@
+import java.util.*;
 public class main {
 
     public static void main(String[] args)
     {
-        Matrix M = new Matrix(3,4);
-        M.bacaMatrix();
-        M.printMatrix();
+        Scanner input=new Scanner(System.in);
+        char inputLuar,inputDalam;
+        System.out.println("Menu Utama : ");
+        System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Keluar\n");
+        inputLuar=input.next().charAt(0);
+        if(inputLuar=='1'){
+            System.out.println("Pilihan : ");
+            System.out.printf("1. Metode Gauss\n2. Metode Gauss Jordan\n3. Kembali\n");
+            inputDalam=input.next().charAt(0);
+            System.out.print("Banyak persamaan : ");
+            System.out.println("Masukkan persamaan : ");
+            Matrix M=new Matrix(n,n+1);
+            M.bacaMatrix();
+            if (inputDalam=='1'){
+                M.gauss();
+                M.printMatrix();
+            }else if(inputDalam=='2'){
+                M.gaussJordan();
+                M.printMatrix();
+            }
+        }else if(inputLuar=='2'){
+
+        }else if(inputLuar=='3'){
+            System.exit(0);
+        }
+        //Driver Solve Paramterik
+        Matrix test = new Matrix(3,4);
+        test.bacaMatrix();
+        test.printMatrix();
         System.out.printf("\n");
         Matrix koefHasil = new Matrix(3,1);
         koefHasil.bacaMatrix();
         koefHasil.printMatrix();
         System.out.printf("\n");
-        M.solveParametrikGauss(koefHasil);
-        M.printHasilParametrik();
+        test.solveParametrikGauss(koefHasil);
+        test.printHasilParametrik();
         System.out.printf("\n");
     }
 
