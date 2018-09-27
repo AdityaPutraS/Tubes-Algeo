@@ -1,13 +1,34 @@
+import java.util.*;
 public class main {
 
     public static void main(String[] args)
     {
-        Matrix M = new Matrix(3,3);
-        M.bacaMatrix();
-        M.printMatrix();
-        M.gauss();
-        System.out.printf("\n");
-        M.printMatrix();
+        Scanner input=new Scanner(System.in);
+        char inputLuar,inputDalam;
+        System.out.println("Menu Utama : ");
+        System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Keluar\n");
+        inputLuar=input.next().charAt(0);
+        if(inputLuar=='1'){
+            System.out.println("Pilihan : ");
+            System.out.printf("1. Metode Gauss\n2. Metode Gauss Jordan\n3. Kembali\n");
+            inputDalam=input.next().charAt(0);
+            System.out.print("Banyak persamaan : ");
+            int n=input.nextInt();
+            System.out.println("Masukkan persamaan : ");
+            Matrix M=new Matrix(n,n+1);
+            M.bacaMatrix();
+            if (inputDalam=='1'){
+                M.gauss();
+                M.printMatrix();
+            }else if(inputDalam=='2'){
+                M.gaussJordan();
+                M.printMatrix();
+            }
+        }else if(inputLuar=='2'){
+
+        }else if(inputLuar=='3'){
+            System.exit(0);
+        }
     }
 
 }
