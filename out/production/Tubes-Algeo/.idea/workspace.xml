@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1a4224e1-461b-4f29-a778-67267e7c9ae9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tubes/error/MismatchedSize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tubes/error/NoSolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/Matrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
-    </list>
+    <list default="true" id="d6c642be-4144-417f-a346-f626dd0fed6d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +10,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="-515591754">
+    <session id="423655951">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
@@ -35,23 +29,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3688" />
+          <entry key="java" value="2745" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3688" />
+          <entry key="JAVA" value="2745" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+            <state relative-caret-position="385">
+              <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -59,39 +53,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Matrix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1234">
-              <caret line="220" column="25" selection-start-line="220" selection-start-column="25" selection-end-line="220" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#327#328#0" expanded="true" />
-                <element signature="e#355#356#0" expanded="true" />
-                <element signature="e#382#383#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1290">
+              <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tubes/error/NoSolution.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MatrixInterpolasi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="49" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+            <state relative-caret-position="256">
+              <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
               <folding>
-                <element signature="e#82#83#0" expanded="true" />
-                <element signature="e#112#113#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tubes/error/MismatchedSize.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
-              <folding>
-                <element signature="e#138#139#0" expanded="true" />
+                <element signature="e#99#100#0" expanded="true" />
+                <element signature="e#119#120#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,17 +81,21 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>make</find>
+      <find>System\.out\.printf\(\&quot;Solusi \:\\nf\(x\)\=\&quot;\)\;\n        int i\;\n        for\(i\=0\;i\&lt;this\.getnBrs\(\)\-1\;i\+\+\)\{\n            if\(this\.data\[i\]\[M\.getnKol\(\)\-1\]\!\=0\) \{\n                if \(i \&gt; 0\)\{\n                    if\(M\.data\[i\]\[M\.getnKol\(\)\-1\]\&gt;0\) \{\n                        if\(M\.data\[i\]\[M\.getnKol\(\)\-1\]\!\=1\)\{\n                            System\.out\.print\(\&quot;\+\&quot; \+ M\.data\[i\]\[M\.getnKol\(\) \- 1\] \+ \&quot;x\^\&quot; \+ \(M\.getnBrs\(\) \- 1 \- i\)\)\;\n                        \}else\{\n                            System\.out\.print\(\&quot;\+x\^\&quot; \+ \(M\.getnBrs\(\) \- 1 \- i\)\)\;\n                        \}\n                    \}else \{\n                        if \(M\.data\[i\]\[M\.getnKol\(\) \- 1\] \!\= 1\) \{\n                            System\.out\.print\(M\.data\[i\]\[M\.getnKol\(\) \- 1\] \+ \&quot;x\^\&quot; \+ \(M\.getnBrs\(\) \- 1 \- i\)\)\;\n                        \} else \{\n                            System\.out\.print\(\&quot;\-x\^\&quot; \+ \(M\.getnBrs\(\) \- 1 \- i\)\)\;\n                        \}\n                    \}\n                \}else\{\n                    if\(M\.data\[i\]\[M\.getnKol\(\)\-1\]\!\=1\)\{\n                        System\.out\.print\(M\.data\[i\]\[M\.getnKol\(\) \- 1\] \+ \&quot;x\^\&quot; \+ \(M\.getnBrs\(\) \- 1 \- i\)\)\;\n                    \}else\{\n                        System\.out\.print\(\&quot;x\^\&quot; \+ \(M\.getnBrs\(\) \- 1 \- i\)\)\;\n                    \}\n                \}\n            \}\n        \}\n        if\(M\.data\[i\]\[M\.getnKol\(\)\-1\]\!\=0\)\{\n            if\(M\.data\[i\]\[M\.getnKol\(\)\-1\]\&gt;0\) \{\n                System\.out\.print\(\&quot;\+\&quot; \+ M\.data\[i\]\[M\.getnKol\(\) \- 1\]\)\;\n            \}else \{\n                System\.out\.print\(M\.data\[i\]\[M\.getnKol\(\) \- 1\]\)\;\n            \}\n        \}</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/NoSolution.java" />
-        <option value="$PROJECT_DIR$/tubes/error/NoSolution.java" />
-        <option value="$PROJECT_DIR$/tubes/error/MismatchedSize.java" />
         <option value="$PROJECT_DIR$/Matrix.java" />
         <option value="$PROJECT_DIR$/main.java" />
+        <option value="$PROJECT_DIR$/MatrixInterpolasi.java" />
       </list>
     </option>
   </component>
@@ -126,11 +105,19 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="85" />
+    <option name="y" value="25" />
+    <option name="width" value="1750" />
+    <option name="height" value="968" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -138,26 +125,16 @@
               <item name="Tubes-Algeo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Tubes-Algeo" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Tubes-Algeo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tubes-Algeo" type="462c0819:PsiDirectoryNode" />
-              <item name="error" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538072214001" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="tubes.error" />
-    </key>
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538108714868" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -171,53 +148,70 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.main">
+    <configuration name="main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main" />
       <module name="Tubes-Algeo" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.main" />
-      </list>
-    </recent_temporary>
+    <configuration name="Unnamed" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.main" />
+      <item itemvalue="Gradle.Unnamed" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1a4224e1-461b-4f29-a778-67267e7c9ae9" name="Default Changelist" comment="" />
-      <created>1538067534101</created>
+      <changelist id="d6c642be-4144-417f-a346-f626dd0fed6d" name="Default Changelist" comment="" />
+      <created>1538092643224</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1538067534101</updated>
-      <workItem from="1538067537354" duration="4675000" />
+      <updated>1538092643224</updated>
+      <workItem from="1538092651728" duration="8404000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4675000" />
+    <option name="totallyTimeSpent" value="8404000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2498618" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10134228" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" weight="0.3294979" />
+      <window_info anchor="bottom" id="Messages" weight="0.32907802" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32907802" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -240,52 +234,28 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Error.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tubes/error/MismatchedSize.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
-          <folding>
-            <element signature="e#138#139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Matrix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1234">
-          <caret line="220" column="25" selection-start-line="220" selection-start-column="25" selection-end-line="220" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#327#328#0" expanded="true" />
-            <element signature="e#355#356#0" expanded="true" />
-            <element signature="e#382#383#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tubes/error/NoSolution.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="49" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
-          <folding>
-            <element signature="e#82#83#0" expanded="true" />
-            <element signature="e#112#113#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1290">
+          <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+        <state relative-caret-position="385">
+          <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MatrixInterpolasi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="e#99#100#0" expanded="true" />
+            <element signature="e#119#120#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

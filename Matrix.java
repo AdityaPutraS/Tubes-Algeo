@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
 import tubes.error.*;
+import java.lang.Math.*;
 
 public class Matrix {
     public float[][] data;
     private float[][] hasilParametrik;
     private int[] status;
-    private int nBrs, nKol;
+    protected int nBrs, nKol;
 
 
     public Matrix(int baris, int kolom) {
@@ -130,24 +131,31 @@ public class Matrix {
 
     public void gauss() {
         //Melakukan algoritma gauss pada matrix ini
+        int i,j;
         this.sortMatrix();
-        for (int i = 0; i < nBrs - 1; i++) {
+        for (i = 0; i < nBrs - 1; i++) {
             //cek apakah baris 0
             if (!this.isRowZero(i)) {
                 //Cari leading coef nya
                 int idxLeadCoef = this.getLeadCoef(i);
                 float leadCoef = this.data[i][idxLeadCoef];
                 //manipulasi semua baris di bawahnya
-                for (int j = i + 1; j < nBrs; j++) {
+                for (j = i + 1; j < nBrs; j++) {
                     if (!this.isRowZero(j)) {
                         float pengali = -1 * this.data[j][idxLeadCoef] / leadCoef;
                         this.plusBaris(j, pengali, i);
-                        //Bagi baris ini  dengan lead coef baris ini juga
-                        int idxLeadBarisJ = this.getLeadCoef(j);
-                        float leadCoefJ = this.data[j][idxLeadBarisJ];
-                        this.kaliBaris(j, 1 / leadCoefJ);
                     }
                 }
+            }
+        }
+
+        //pembagian dilakukan terpisah untuk menghindari sebaris 0 semua setelah proses manipulasi
+        for(i=0;i<this.nBrs;i++){
+            if(!this.isRowZero(i)) {
+                int idxLeadBaris = this.getLeadCoef(i);
+                float leadCoef = this.data[i][idxLeadBaris];
+                System.out.println(leadCoef);
+                this.kaliBaris(i, 1 / leadCoef);
             }
         }
     }
@@ -315,4 +323,6 @@ public class Matrix {
         }
 
     }
+
+
 }
