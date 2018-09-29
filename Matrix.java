@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.*;
 
 import tubes.error.*;
+
 import java.lang.Math.*;
 
 public class Matrix {
@@ -12,6 +15,12 @@ public class Matrix {
         this.nBrs = baris;
         this.nKol = kolom;
         data = new float[baris][kolom];
+    }
+
+    public Matrix(float[][] dat, int baris, int kolom) {
+        this.data = dat;
+        this.nBrs = baris;
+        this.nKol = kolom;
     }
 
     public int getnBrs() {
@@ -29,6 +38,44 @@ public class Matrix {
                 this.data[i][j] = scan.nextFloat();
             }
         }
+    }
+
+    public void bacaMatrixFile(String namaFile) {
+        File fileExternal;
+        int baris = -1, kolom = -1;
+        ArrayList<ArrayList<Float>> temp = new ArrayList<ArrayList<Float>>();
+        try {
+            fileExternal = new File(namaFile);
+            Scanner scanBaris = new Scanner(fileExternal);
+            while (scanBaris.hasNextLine()) {
+                baris += 1;
+                temp.add(new ArrayList<Float>());
+                String s = scanBaris.nextLine();
+                Scanner scanFloat = new Scanner(s);
+                while (scanFloat.hasNextFloat()) {
+                    Float f = scanFloat.nextFloat();
+                    temp.get(baris).add(f);
+                }
+            }
+            kolom = temp.get(0).size();
+            baris += 1; //harus di +1 karena baris tadi digunakan untuk mengindex, bukan untuk menghitung banyak baris
+            //Buat matrixnya, jika baris & kolom != -1
+            if (baris != -1 && kolom != -1) {
+                this.data = new float[temp.size()][temp.get(0).size()];
+                for (int i = 0; i < baris; i++) {
+                    for (int j = 0; j < kolom; j++) {
+                        this.data[i][j] = temp.get(i).get(j);
+                    }
+                }
+                this.nBrs = baris;
+                this.nKol = kolom;
+            } else {
+                System.out.println("File kosong");
+            }
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+
     }
 
     public void printMatrix() {
@@ -129,7 +176,7 @@ public class Matrix {
 
     public void gauss() {
         //Melakukan algoritma gauss pada matrix ini
-        int i,j;
+        int i, j;
         this.sortMatrix();
         for (i = 0; i < nBrs - 1; i++) {
             //cek apakah baris 0
@@ -148,8 +195,8 @@ public class Matrix {
         }
 
         //pembagian dilakukan terpisah untuk menghindari sebaris 0 semua setelah proses manipulasi
-        for(i=0;i<this.nBrs;i++){
-            if(!this.isRowZero(i)) {
+        for (i = 0; i < this.nBrs; i++) {
+            if (!this.isRowZero(i)) {
                 int idxLeadBaris = this.getLeadCoef(i);
                 float leadCoef = this.data[i][idxLeadBaris];
                 this.kaliBaris(i, 1 / leadCoef);
@@ -157,15 +204,15 @@ public class Matrix {
         }
     }
 
-    public void gaussJordan(){
+    public void gaussJordan() {
         this.gauss();
-        int i,j;
-        for (i=nBrs-1;i>0;i--){
-            if(!this.isRowZero(i)) {
+        int i, j;
+        for (i = nBrs - 1; i > 0; i--) {
+            if (!this.isRowZero(i)) {
                 int idxLeadCoef = this.getLeadCoef(i);
                 //float leadCoef = this.data[i][idxLeadCoef];
                 for (j = i - 1; j >= 0; j--) {
-                    if(!this.isRowZero(j)) {
+                    if (!this.isRowZero(j)) {
                         float pengali = -1 * this.data[j][idxLeadCoef];
                         this.plusBaris(j, pengali, i);
                     }

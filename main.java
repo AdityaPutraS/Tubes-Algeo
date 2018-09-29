@@ -1,8 +1,10 @@
 import java.util.*;
+import java.io.*;
 
 public class main {
 
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
         char inputLuar, inputDalam;
         int baris, kolom;
@@ -31,7 +33,7 @@ public class main {
         }*/
         do {
             System.out.println("Menu Utama : ");
-            System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Keluar\n");
+            System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Keluar\n4. Test File\n");
             inputLuar = input.next().charAt(0);
             if (inputLuar == '1') {
                 System.out.println("Pilihan : ");
@@ -42,7 +44,7 @@ public class main {
                 System.out.print("Banyak variable : ");
                 kolom = input.nextInt();
                 System.out.println("Masukkan persamaan : ");
-                MatrixParametrik M = new MatrixParametrik(baris, kolom+1);
+                MatrixParametrik M = new MatrixParametrik(baris, kolom + 1);
                 M.bacaMatrix();
                 if (inputDalam == '1') {
                     M.gauss();
@@ -80,10 +82,13 @@ public class main {
                 }
 
 
+            } else if (inputLuar == '4') {
+                Matrix m = new Matrix(2, 3);
+                m.bacaMatrixFile("temp.txt");
+                m.printMatrix();
             }
 
+        } while (inputLuar != '3');
 
-        } while (inputLuar != 3);
     }
-
 }
