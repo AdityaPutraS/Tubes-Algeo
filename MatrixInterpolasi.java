@@ -1,4 +1,5 @@
 public class MatrixInterpolasi extends Matrix {
+
     public MatrixInterpolasi(int baris, int kolom) {
         super(baris,kolom);
     }
@@ -32,7 +33,10 @@ public class MatrixInterpolasi extends Matrix {
         return valid;
     }
 
+
+    //Gauss Jordan
     public void printSolusiInterpolasi(){
+        //Asumsi Matrix sudah di Gauss Jordan
         System.out.printf("Solusi :\nf(x)=");
         int i;
         for(i=0;i<this.getnBrs()-1;i++){
@@ -108,4 +112,6 @@ public class MatrixInterpolasi extends Matrix {
         }
         System.out.printf("f(%.2f)=%.2f\n",x,sum);
     }
+
+
 }

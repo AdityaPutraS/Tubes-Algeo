@@ -5,8 +5,6 @@ import java.lang.Math.*;
 
 public class Matrix {
     public float[][] data;
-    private float[][] hasilParametrik;
-    private int[] status;
     protected int nBrs, nKol;
 
 
@@ -154,154 +152,7 @@ public class Matrix {
             if(!this.isRowZero(i)) {
                 int idxLeadBaris = this.getLeadCoef(i);
                 float leadCoef = this.data[i][idxLeadBaris];
-                System.out.println(leadCoef);
                 this.kaliBaris(i, 1 / leadCoef);
-            }
-        }
-    }
-
-    public void solveParametrikGauss(Matrix koefHasil) {
-        //I.S : Matrix awal sudah di gauss
-        int banyakVariable = this.nKol;
-        //cek ukuran koefHasil
-        if (koefHasil.getnBrs() == this.nBrs && koefHasil.getnKol() == 1) {
-            this.hasilParametrik = new float[banyakVariable][banyakVariable + 1];
-            this.status = new int[banyakVariable];
-            /*
-            Bentuk matrix hasil adalah seperti berikut
-            x0  =   0*x0 + b*x1 + c*x2 + ... + koefHasil0
-            x1  =   d*x0 + 0*x1 + f*x2 + ... + koefHasil1
-            x2  =   g*x0 + h*x1 + 0*x2 + ... + koefHasil2
-
-            Untuk variable bebas, nilai matrix pada baris tersebut adalah
-            x5 = 0*x0 + 0*x1 + 0*x2 + 0*x3 + 0*x4 + 1*x5 + 0*x6 + ... + 0   (Contoh)   status = 0
-
-            Untuk variable terikat, nilai matrix pada baris tersebut adalah
-            x5 = 1*x0 + 2*x1 + 0*x2 + 0*x3 + 0*x4 + 0*x5 + 3*x6 + ... + 30  (Contoh)    status = 1
-
-            Untuk variable tentu, nilai matrix pada baris tersebut adalah
-            x5 = 0*x0 + 0*x1 + 0*x2 + 0*x3 + 0*x4 + 1*x5 + 0*x6 + ... + 20  (Contoh)    status = 2
-
-            Jika tidak ada solusi maka akan melempar exception NoSolution
-             */
-            //Asumsi matrix sudah dilakukan operasi gauss dan sekarang sedang dalam bentuk row echelon form
-            //Dari atas, cari status variable, sekaligus ngecek apakah ada baris yang bermasalah (pers 0 semua, tapi hasil != 0)
-            for (int i = 0; i < this.nBrs; i++) {
-                if (this.isRowZero(i)) {
-                    //Kosong semua, ada 2 kemungkinan. koefHasil[i] == 0 -> ga guna, koefHasil[i] != 0 -> tidak ada solusi
-                    if (koefHasil.data[i][0] != 0) {
-                        throw new NoSolution("Tidak ada solusi untuk persamaan ini");
-                    }
-                } else {
-                    //Tidak 0 semua, cari leading coefficientnya lalu cek belakangnya, jika 0 semua ->  variable tentu, jika ada != 0 -> variable terikat
-                    int idxLead = this.getLeadCoef(i);
-                    boolean tentu = true;
-                    for (int j = idxLead + 1; j < this.nKol; j++) {
-                        if (this.data[i][j] != 0) {
-                            tentu = false;
-                            break;
-                        }
-                    }
-                    if (tentu) {
-                        this.status[idxLead] = 2;
-                    } else {
-                        this.status[idxLead] = 1;
-                    }
-                }
-            }
-
-            //Iter dari bawah, lakukan algoritma berikut
-            /*
-                Algoritma :
-                    Untuk setiap baris, cari leading koef nya, lalu untuk setiap kolom disamping lead koef, sebut saja kolom k
-                    lakukan :
-                        jika status[k] == 0 maka ->
-                            hasil[leadKoef][k] += -data[i][k]
-                        jika status[k] == 1 maka ->
-                            hasil[leadKoef] += -data[i][k]*hasil[k]
-                        jika status[k] == 2 maka ->
-                            hasil[leadKoef][banyakVariable] += hasil[k][banyakVariable]
-             */
-            for (int i = this.nBrs - 1; i >= 0; i--) {
-                int idxLead = this.getLeadCoef(i);
-                for (int k = idxLead + 1; k < this.nKol; k++) {
-                    if (this.status[k] == 0) { //bebas
-                        this.hasilParametrik[idxLead][k] += -1 * this.data[i][k];
-                    } else if (this.status[k] == 1) { //terikat
-                        for (int j = 0; j < this.nKol; j++) {
-                            this.hasilParametrik[idxLead][j] += (-1*this.data[i][k] * this.hasilParametrik[k][j] );
-                        }
-                        this.hasilParametrik[idxLead][banyakVariable] += (-1*this.data[i][k] * this.hasilParametrik[k][banyakVariable]);
-                    } else if (this.status[k] == 2) { //tentu
-                        this.hasilParametrik[idxLead][banyakVariable] += -1 * this.hasilParametrik[k][banyakVariable];
-                    }
-                }
-                this.hasilParametrik[idxLead][banyakVariable] += koefHasil.data[i][0];
-            }
-            
-        } else {
-            //ukuran koefHasil tidak sesuai
-            throw new MismatchedSize("Ukuran matrix tidak sesuai");
-        }
-    }
-
-    public void printHasilParametrik()
-    {
-        for (int i = 0; i < this.nKol ; i++) {
-            //Cek tipe variablenya
-            if(status[i] == 0){
-                //bebas
-                System.out.printf("x%d = bebas\n",i);
-            }else if(status[i] == 1){
-                //terikat
-                System.out.printf("x%d = ",i);
-                boolean pertama = true;
-                for (int j = 0; j < this.nKol; j++) {
-                    float nilai = this.hasilParametrik[i][j];
-                    if(nilai != 0){
-                        if(nilai > 0){
-                            //positif
-                            if(pertama) {
-                                System.out.printf("(%.2f * x%d)", nilai, j);
-                                pertama = false;
-                            }else{
-                                System.out.printf(" + (%.2f * x%d)", nilai, j);
-                            }
-                        }else{
-                            //negatif
-                            if(pertama) {
-                                System.out.printf("(-%.2f * x%d)", -1 * nilai, j);
-                                pertama = false;
-                            }else{
-                                System.out.printf(" - (-%.2f * x%d)", -1 * nilai, j);
-                            }
-                        }
-                    }
-                }
-                float koefHasil = this.hasilParametrik[i][this.nKol];
-                if(koefHasil != 0){
-                    if(koefHasil > 0){
-                        //positif
-                        if(pertama) {
-                            System.out.printf("%.2f", koefHasil);
-                            pertama = false;
-                        }else{
-                            System.out.printf(" + %.2f", koefHasil);
-                        }
-                    }else{
-                        //negatif
-                        if(pertama) {
-                            System.out.printf("-%.2f", -1 * koefHasil);
-                            pertama = false;
-                        }else{
-                            System.out.printf(" - %.2f", -1 * koefHasil);
-                        }
-                    }
-                }
-                System.out.printf("\n");
-            }else if(status[i] == 2){
-                //tentu
-                System.out.printf("x%d = %.2f\n",i,this.hasilParametrik[i][this.nKol]);
             }
         }
     }
@@ -312,7 +163,7 @@ public class Matrix {
         for (i=nBrs-1;i>0;i--){
             if(!this.isRowZero(i)) {
                 int idxLeadCoef = this.getLeadCoef(i);
-                float leadCoef = this.data[i][idxLeadCoef];
+                //float leadCoef = this.data[i][idxLeadCoef];
                 for (j = i - 1; j >= 0; j--) {
                     if(!this.isRowZero(j)) {
                         float pengali = -1 * this.data[j][idxLeadCoef];
