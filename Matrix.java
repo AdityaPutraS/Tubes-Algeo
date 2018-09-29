@@ -81,7 +81,7 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < this.nBrs; i++) {
             for (int j = 0; j < this.nKol; j++) {
-                System.out.printf("%.2f ", this.data[i][j]);
+                System.out.printf("%f ", this.data[i][j]);
             }
             System.out.print("\n");
         }
@@ -129,10 +129,10 @@ public class Matrix {
     public boolean isRowZero(int r) {
         //Return true jika baris r semuanya 0
         int i = 0;
-        while ((this.data[r][i] == 0) && i < this.nKol - 1) {
+        while (this.isZero((this.data[r][i])) && i < this.nKol - 1) {
             i++;
         }
-        if (this.data[r][i] == 0) {
+        if (this.isZero((this.data[r][i]))) {
             return true;
         } else {
             return false;
@@ -144,7 +144,7 @@ public class Matrix {
         boolean found = false;
         int i = 0;
         while ((i < this.nKol) && !found) {
-            if (this.data[r][i] != 0) {
+            if (!this.isZero(this.data[r][i])) {
                 found = true;
             } else {
                 i++;
@@ -157,6 +157,10 @@ public class Matrix {
         }
     }
 
+    public boolean isZero(float x){
+    	return Math.abs(x)<0.0000001;
+    }
+
     public void sortMatrix() {
         //Selection sort, dari kecil ke besar
         int i, j;
@@ -167,6 +171,11 @@ public class Matrix {
                     int cidxLeadCoef = this.getLeadCoef(j);
                     if (cidxLeadCoef < this.getLeadCoef(brsMax)) {
                         brsMax = j;
+                    }else if(cidxLeadCoef==this.getLeadCoef(brsMax)){
+                    	if(this.data[j][cidxLeadCoef]>this.data[brsMax][this.getLeadCoef(brsMax)])
+                    	{
+                    		brsMax = j;
+                    	}
                     }
                 }
                 this.tukarBaris(i, brsMax);
