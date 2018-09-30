@@ -1,3 +1,5 @@
+package tubes.matrix;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
@@ -7,17 +9,17 @@ import tubes.error.*;
 import java.lang.Math.*;
 
 public class Matrix {
-    public float[][] data;
+    public double[][] data;
     protected int nBrs, nKol;
 
 
     public Matrix(int baris, int kolom) {
         this.nBrs = baris;
         this.nKol = kolom;
-        data = new float[baris][kolom];
+        data = new double[baris][kolom];
     }
 
-    public Matrix(float[][] dat, int baris, int kolom) {
+    public Matrix(double[][] dat, int baris, int kolom) {
         this.data = dat;
         this.nBrs = baris;
         this.nKol = kolom;
@@ -35,7 +37,7 @@ public class Matrix {
         Scanner scan = new Scanner(System.in);
         for (int i = 0; i < this.nBrs; i++) {
             for (int j = 0; j < this.nKol; j++) {
-                this.data[i][j] = scan.nextFloat();
+                this.data[i][j] = scan.nextDouble();
             }
         }
     }
@@ -43,17 +45,17 @@ public class Matrix {
     public void bacaMatrixFile(String namaFile) {
         File fileExternal;
         int baris = -1, kolom = -1;
-        ArrayList<ArrayList<Float>> temp = new ArrayList<ArrayList<Float>>();
+        ArrayList<ArrayList<Double>> temp = new ArrayList<ArrayList<Double>>();
         try {
             fileExternal = new File(namaFile);
             Scanner scanBaris = new Scanner(fileExternal);
             while (scanBaris.hasNextLine()) {
                 baris += 1;
-                temp.add(new ArrayList<Float>());
+                temp.add(new ArrayList<Double>());
                 String s = scanBaris.nextLine();
-                Scanner scanFloat = new Scanner(s);
-                while (scanFloat.hasNextFloat()) {
-                    Float f = scanFloat.nextFloat();
+                Scanner scanDouble = new Scanner(s);
+                while (scanDouble.hasNextDouble()) {
+                    Double f = scanDouble.nextDouble();
                     temp.get(baris).add(f);
                 }
             }
@@ -61,7 +63,7 @@ public class Matrix {
             baris += 1; //harus di +1 karena baris tadi digunakan untuk mengindex, bukan untuk menghitung banyak baris
             //Buat matrixnya, jika baris & kolom != -1
             if (baris != -1 && kolom != -1) {
-                this.data = new float[temp.size()][temp.get(0).size()];
+                this.data = new double[temp.size()][temp.get(0).size()];
                 for (int i = 0; i < baris; i++) {
                     for (int j = 0; j < kolom; j++) {
                         this.data[i][j] = temp.get(i).get(j);
@@ -94,14 +96,14 @@ public class Matrix {
             System.out.println("r2 tidak valid");
         } else {
             for (int i = 0; i < this.nKol; i++) {
-                float temp = this.data[r1][i];
+                double temp = this.data[r1][i];
                 this.data[r1][i] = this.data[r2][i];
                 this.data[r2][i] = temp;
             }
         }
     }
 
-    public void kaliBaris(int r, float a) {
+    public void kaliBaris(int r, double a) {
         //Membuat r = r * a
         //Valdasi
         if (r < 0 || r >= nBrs) {
@@ -113,7 +115,7 @@ public class Matrix {
         }
     }
 
-    public void plusBaris(int r1, float a, int r2) {
+    public void plusBaris(int r1, double a, int r2) {
         //Membuat r1 = r1 + a * r2
         if (r1 < 0 || r1 >= nBrs) {
             System.out.println("r1 tidak valid");
@@ -157,7 +159,7 @@ public class Matrix {
         }
     }
 
-    public boolean isZero(float x){
+    public boolean isZero(double x){
     	return Math.abs(x)<0.0000001;
     }
 
@@ -192,11 +194,11 @@ public class Matrix {
             if (!this.isRowZero(i)) {
                 //Cari leading coef nya
                 int idxLeadCoef = this.getLeadCoef(i);
-                float leadCoef = this.data[i][idxLeadCoef];
+                double leadCoef = this.data[i][idxLeadCoef];
                 //manipulasi semua baris di bawahnya
                 for (j = i + 1; j < nBrs; j++) {
                     if (!this.isRowZero(j)) {
-                        float pengali = -1 * this.data[j][idxLeadCoef] / leadCoef;
+                        double pengali = -1 * this.data[j][idxLeadCoef] / leadCoef;
                         this.plusBaris(j, pengali, i);
                     }
                 }
@@ -207,7 +209,7 @@ public class Matrix {
         for (i = 0; i < this.nBrs; i++) {
             if (!this.isRowZero(i)) {
                 int idxLeadBaris = this.getLeadCoef(i);
-                float leadCoef = this.data[i][idxLeadBaris];
+                double leadCoef = this.data[i][idxLeadBaris];
                 this.kaliBaris(i, 1 / leadCoef);
             }
         }
@@ -222,7 +224,7 @@ public class Matrix {
                 //float leadCoef = this.data[i][idxLeadCoef];
                 for (j = i - 1; j >= 0; j--) {
                     if (!this.isRowZero(j)) {
-                        float pengali = -1 * this.data[j][idxLeadCoef];
+                        double pengali = -1 * this.data[j][idxLeadCoef];
                         this.plusBaris(j, pengali, i);
                     }
                 }

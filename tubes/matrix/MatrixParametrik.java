@@ -1,9 +1,10 @@
-import tubes.error.MismatchedSize;
+package tubes.matrix;
+
 import tubes.error.NoSolution;
 
 public class MatrixParametrik extends Matrix {
     //Variable
-    private float[][] hasilParametrik;
+    private double[][] hasilParametrik;
     /*
             Bentuk array hasilParametrik adalah seperti berikut
             x0  =   0*x0 + b*x1 + c*x2 + ... + x
@@ -28,7 +29,7 @@ public class MatrixParametrik extends Matrix {
     //Konstruktor
     public MatrixParametrik(int baris, int kolom) {
         super(baris, kolom);
-        this.hasilParametrik = new float[banyakVariable][banyakVariable + 1];
+        this.hasilParametrik = new double[banyakVariable][banyakVariable + 1];
         this.status = new int[banyakVariable];
     }
 
@@ -79,7 +80,7 @@ public class MatrixParametrik extends Matrix {
 
     //Metode Gauss
     public void solveParametrikGauss() {
-        //I.S : Matrix awal sudah di gauss dan status sudah di generate
+        //I.S : tubes.matrix.Matrix awal sudah di gauss dan status sudah di generate
         /*
             Asumsi matrix sudah dilakukan operasi gauss dan sekarang sedang dalam bentuk row echelon form
             Iter dari bawah, lakukan algoritma berikut
@@ -162,7 +163,7 @@ public class MatrixParametrik extends Matrix {
                 boolean pertama = true;
                 //Print ax^n + bx^(n-1) + cx^(n-2) ... + dx
                 for (int j = 0; j < this.banyakVariable; j++) {
-                    float nilai = this.hasilParametrik[i][j];
+                    double nilai = this.hasilParametrik[i][j];
                     if (nilai != 0) {
                         if (nilai > 0) {
                             //positif
@@ -184,7 +185,7 @@ public class MatrixParametrik extends Matrix {
                     }
                 }
                 //Print koefisien fungsi
-                float koefHasil = this.hasilParametrik[i][banyakVariable];
+                double koefHasil = this.hasilParametrik[i][banyakVariable];
                 if (koefHasil != 0) {
                     if (koefHasil > 0) {
                         //positif
