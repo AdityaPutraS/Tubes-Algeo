@@ -131,10 +131,10 @@ public class Matrix {
     public boolean isRowZero(int r) {
         //Return true jika baris r semuanya 0
         int i = 0;
-        while (this.isZero((this.data[r][i])) && i < this.nKol - 1) {
+        while ((this.data[r][i]==0) && i < this.nKol - 1) {
             i++;
         }
-        if (this.isZero((this.data[r][i]))) {
+        if (this.data[r][i]==0) {
             return true;
         } else {
             return false;
@@ -146,7 +146,7 @@ public class Matrix {
         boolean found = false;
         int i = 0;
         while ((i < this.nKol) && !found) {
-            if (!this.isZero(this.data[r][i])) {
+            if (this.data[r][i]!=0) {
                 found = true;
             } else {
                 i++;
@@ -157,10 +157,6 @@ public class Matrix {
         } else {
             return this.nKol;
         }
-    }
-
-    public boolean isZero(double x){
-    	return Math.abs(x)<0.0000001;
     }
 
     public void sortMatrix() {
@@ -201,6 +197,7 @@ public class Matrix {
                         double pengali = -1 * this.data[j][idxLeadCoef] / leadCoef;
                         this.plusBaris(j, pengali, i);
                     }
+                    this.data[j][idxLeadCoef]=0;
                 }
             }
         }
