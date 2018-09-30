@@ -17,7 +17,12 @@ public class main {
         String consoleView;
         do {
             System.out.println("Menu Utama : ");
-            System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Keluar\n4. Test File\n");
+            System.out.printf(
+                    "1. Sistem Persamaan Linier\n" +
+                    "2. Interpolasi Polinom\n" +
+                    "3. Keluar\n" +
+                    "4. Test File\n" +
+                    "5. GUI\n");
             inputLuar = input.next().charAt(0);
             if (inputLuar == '1') {
                 System.out.println("Pilihan : ");
@@ -97,6 +102,8 @@ public class main {
                 Matrix m = new Matrix(2, 3);
                 m.bacaMatrixFile("temp.txt");
                 m.printMatrix();
+            } else if(inputLuar == '5') {
+                GUI gui = new GUI(500,500);
             }
 
         } while (inputLuar != '3');
