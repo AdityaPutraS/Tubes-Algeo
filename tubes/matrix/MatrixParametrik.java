@@ -156,7 +156,8 @@ public class MatrixParametrik extends Matrix {
             //Cek tipe variablenya
             if (status[i] == 0) {
                 //bebas
-                System.out.printf("x%d = bebas\n", i);
+                System.out.printf("x%d = bebas", i);
+                System.out.println();
             } else if (status[i] == 1) {
                 //terikat
                 System.out.printf("x%d = ", i);
@@ -205,10 +206,11 @@ public class MatrixParametrik extends Matrix {
                         }
                     }
                 }
-                System.out.printf("\n");
+                System.out.println();
             } else if (status[i] == 2) {
                 //tentu
-                System.out.printf("x%d = %.2f\n", i, this.hasilParametrik[i][banyakVariable]);
+                System.out.printf("x%d = %.2f", i, this.hasilParametrik[i][banyakVariable]);
+                System.out.println();
             }
         }
     }

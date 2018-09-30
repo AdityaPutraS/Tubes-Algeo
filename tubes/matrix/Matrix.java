@@ -2,11 +2,9 @@ package tubes.matrix;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.*;
+import java.io.File;
 
-import tubes.error.*;
 
-import java.lang.Math.*;
 
 public class Matrix {
     public double[][] data;
@@ -85,7 +83,7 @@ public class Matrix {
             for (int j = 0; j < this.nKol; j++) {
                 System.out.printf("%f ", this.data[i][j]);
             }
-            System.out.print("\n");
+            System.out.println();
         }
     }
 
@@ -229,6 +227,5 @@ public class Matrix {
         }
 
     }
-
 
 }

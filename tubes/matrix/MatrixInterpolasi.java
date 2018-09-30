@@ -135,7 +135,8 @@ public class MatrixInterpolasi extends Matrix {
         for(int i=0;i<this.getnBrs();i++){
             sum+=this.data[i][this.getnKol()-1]*(double)Math.pow((double)x,(double)(this.getnBrs()-1-i));
         }
-        System.out.printf("f(%.2f)=%f\n",x,sum);
+        System.out.printf("f(%.2f)=%f",x,sum);
+        System.out.println();
     }
 
 
