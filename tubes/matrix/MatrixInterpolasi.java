@@ -74,9 +74,10 @@ public class MatrixInterpolasi extends Matrix {
 
 
     //Gauss Jordan
-    public void printSolusiInterpolasi(){
+    public void printSolusiInterpolasi(boolean isGui, JPanel panel){
         //Asumsi tubes.matrix.Matrix sudah di Gauss Jordan
-        System.out.printf("Solusi :\nf(x)=");
+        String hasil = "";
+        hasil += String.format("Solusi :\nf(x)=");
         int i;
         for(i=0;i<this.getnBrs()-1;i++){
             if(this.data[i][this.getnKol()-1]!=0) {
@@ -85,50 +86,50 @@ public class MatrixInterpolasi extends Matrix {
                     if(this.data[i][this.getnKol()-1]>0) {
                         if(this.data[i][this.getnKol()-1]!=1){
                             if(pangkat!=1){
-                                System.out.printf("+%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
+                                hasil += String.format("+%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
                             }else{
-                                System.out.printf("+%.2fx",this.data[i][this.getnKol() - 1]);
+                                hasil += String.format("+%.2fx",this.data[i][this.getnKol() - 1]);
                             }
                         }else{
                             if(pangkat!=1){
-                                System.out.printf("+x^%d",pangkat);
+                                hasil += String.format("+x^%d",pangkat);
                             }else{
-                                System.out.printf("+x");
+                                hasil += String.format("+x");
                             }
                         }
                     }else {
                         if (this.data[i][this.getnKol() - 1] != -1) {
                             if(pangkat!=1){
-                                System.out.printf("%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
+                                hasil += String.format("%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
                             }else{
-                                System.out.printf("%.2fx",this.data[i][this.getnKol() - 1]);
+                                hasil += String.format("%.2fx",this.data[i][this.getnKol() - 1]);
                             }
                         } else {
                             if(pangkat!=1){
-                                System.out.printf("-x^%d",pangkat);
+                                hasil += String.format("-x^%d",pangkat);
                             }else{
-                                System.out.printf("-x");
+                                hasil += String.format("-x");
                             }
                         }
                     }
                 }else{
                     if(this.data[i][this.getnKol()-1]!=1&&this.data[i][this.getnKol()-1]!=-1){
                         if(pangkat!=1){
-                            System.out.printf("%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
+                            hasil += String.format("%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
                         }else{
-                            System.out.printf("%.2fx",this.data[i][this.getnKol() - 1]);
+                            hasil += String.format("%.2fx",this.data[i][this.getnKol() - 1]);
                         }
                     }else if(this.data[i][this.getnKol()-1]==1){
                         if(pangkat!=1){
-                            System.out.printf("x^%d",pangkat);
+                            hasil += String.format("x^%d",pangkat);
                         }else{
-                            System.out.printf("x");
+                            hasil += String.format("x");
                         }
                     }else{
                         if(pangkat==-1){
-                            System.out.printf("-x^%d",pangkat);
+                            hasil += String.format("-x^%d",pangkat);
                         }else{
-                            System.out.printf("-x");
+                            hasil += String.format("-x");
                         }
                     }
                 }
@@ -136,15 +137,20 @@ public class MatrixInterpolasi extends Matrix {
         }
         if(this.data[i][this.getnKol()-1]!=0){
             if(this.data[i][this.getnKol()-1]>0) {
-                System.out.printf("+%.2f",this.data[i][this.getnKol() - 1]);
+                hasil += String.format("+%.2f",this.data[i][this.getnKol() - 1]);
             }else {
-                System.out.printf("%.2f",this.data[i][this.getnKol() - 1]);
+                hasil += String.format("%.2f",this.data[i][this.getnKol() - 1]);
             }
         }
-        System.out.println();
+        hasil += "\n";
+        if(isGui){
+
+        }else{
+
+        }
     }
 
-    public void printHasilInterpolasi(double x){
+    public void printHasilInterpolasi(double x,boolean isGui, JPanel panel){
         double sum=0;
         for(int i=0;i<this.getnBrs();i++){
             sum+=this.data[i][this.getnKol()-1]*(double)Math.pow((double)x,(double)(this.getnBrs()-1-i));

@@ -82,12 +82,12 @@ public class main {
                 M.gaussJordan();
                 if (M.titikValid()) {
                     capture.start();
-                    M.printSolusiInterpolasi();
+                    M.printSolusiInterpolasi(false,null);
                     consoleView=capture.stop();
                     System.out.print("Masukkan nilai x yang akan diinterpolasi : ");
                     double x = input.nextDouble();
                     capture.start();
-                    M.printHasilInterpolasi(x);
+                    M.printHasilInterpolasi(x,false,null);
                     consoleView+=capture.stop();
                 } else {
                     capture.start();

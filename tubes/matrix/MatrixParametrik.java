@@ -155,10 +155,10 @@ public class MatrixParametrik extends Matrix {
                     for (int k = idxLead + 1; k < banyakVariable; k++) {
                         this.hasilParametrik[idxLead][k] += (-1 * this.data[i][k]);
                     }
+                    this.hasilParametrik[idxLead][banyakVariable] += this.data[i][this.nKol - 1];
                 } else if (this.status[idxLead] == 2) {
                     this.hasilParametrik[idxLead][banyakVariable] = this.data[i][this.nKol - 1];
                 }
-                this.hasilParametrik[idxLead][banyakVariable] += this.data[i][this.nKol - 1];
             }
         }
 
