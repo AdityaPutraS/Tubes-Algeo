@@ -57,7 +57,7 @@ public class main {
                     M.solveParametrikGaussJordan();
                 }
                 System.out.println("Solusi Persamaan Linier : ");
-                M.printHasilParametrik();
+                M.printHasilParametrik(false, null);
                 consoleView=capture.stop();
                 if(external.simpanStatus()){
                     external.saveExternal(consoleView);

@@ -167,11 +167,6 @@ public class Matrix {
                     int cidxLeadCoef = this.getLeadCoef(j);
                     if (cidxLeadCoef < this.getLeadCoef(brsMax)) {
                         brsMax = j;
-                    }else if(cidxLeadCoef==this.getLeadCoef(brsMax)){
-                    	if(this.data[j][cidxLeadCoef]>this.data[brsMax][this.getLeadCoef(brsMax)])
-                    	{
-                    		brsMax = j;
-                    	}
                     }
                 }
                 this.tukarBaris(i, brsMax);

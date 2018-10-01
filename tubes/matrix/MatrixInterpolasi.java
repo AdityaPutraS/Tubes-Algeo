@@ -1,9 +1,23 @@
 package tubes.matrix;
 
+import javax.swing.*;
+
 public class MatrixInterpolasi extends Matrix {
 
     public MatrixInterpolasi(int baris, int kolom) {
         super(baris,kolom);
+    }
+
+    public MatrixInterpolasi(JTable tabel, int baris, int kolom)
+    {
+        super(baris,kolom);
+        double[][] matTitik = new double[baris][2];
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < 2; j++) {
+                matTitik[i][j] = Double.valueOf(tabel.getModel().getValueAt(i,j).toString());
+            }
+        }
+        this.titikMatrix(matTitik);
     }
 
     public static double fastPangkat(double base, int pangkat)

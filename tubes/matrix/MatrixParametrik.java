@@ -2,6 +2,9 @@ package tubes.matrix;
 
 import tubes.error.NoSolution;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class MatrixParametrik extends Matrix {
     //Variable
     private double[][] hasilParametrik;
@@ -33,8 +36,20 @@ public class MatrixParametrik extends Matrix {
         this.status = new int[banyakVariable];
     }
 
+    public MatrixParametrik(JTable tabel, int baris, int kolom) {
+        super(baris, kolom);
+        this.hasilParametrik = new double[banyakVariable][banyakVariable + 1];
+        this.status = new int[banyakVariable];
+        for (int i = 0; i < baris; i++) {
+            for (int j = 0; j < kolom; j++) {
+                this.data[i][j] = Double.valueOf(tabel.getModel().getValueAt(i, j).toString());
+            }
+        }
+
+    }
+
     public void genStatus() {
-        for (int i = this.nBrs-1; i >= 0; i--) {
+        for (int i = this.nBrs - 1; i >= 0; i--) {
             if (!this.isRowZero(i)) {
                 /*
                     Asumsi matrix sudah di gauss / gauss-jordan
@@ -63,7 +78,7 @@ public class MatrixParametrik extends Matrix {
                     for (int j = idxLead + 1; j < banyakVariable; j++) {
                         //Syarat tentu adalah, semua variable dikanannya koefnya 0 atau tentu semua
                         //Maka dia tidak tentu jika ada salah satu yang tidak 0 dan tidak tentu
-                        if (this.data[i][j]!= 0 && this.status[j]!=2) {
+                        if (this.data[i][j] != 0 && this.status[j] != 2) {
                             tentu = false;
                             break;
                         }
@@ -96,7 +111,7 @@ public class MatrixParametrik extends Matrix {
                         hasil[leadKoef][banyakVariable] += -hasil[k][banyakVariable]
          */
         for (int i = this.nBrs - 1; i >= 0; i--) {
-            if(!isRowZero(i)) {
+            if (!isRowZero(i)) {
                 int idxLead = this.getLeadCoef(i);
                 for (int k = idxLead + 1; k < this.banyakVariable; k++) {
                     if (this.status[k] == 0) { //bebas
@@ -134,7 +149,7 @@ public class MatrixParametrik extends Matrix {
                         hasil[leadKoef][banyakVariable] = data[i][banyakVariable]
          */
         for (int i = this.nBrs - 1; i >= 0; i--) {
-            if(!isRowZero(i)) {
+            if (!isRowZero(i)) {
                 int idxLead = this.getLeadCoef(i);
                 if (status[idxLead] == 1) {
                     for (int k = idxLead + 1; k < banyakVariable; k++) {
@@ -150,17 +165,18 @@ public class MatrixParametrik extends Matrix {
     }
 
 
-    public void printHasilParametrik() {
+    public void printHasilParametrik(boolean isGui, JPanel panel) {
         //Dipanggil setelah solveParametrikGauss() atau solveParametrikGaussJordan()
+        String hasil = "";
         for (int i = 0; i < this.banyakVariable; i++) {
             //Cek tipe variablenya
             if (status[i] == 0) {
                 //bebas
-                System.out.printf("x%d = bebas", i);
-                System.out.println();
+                hasil += String.format("x%d = bebas", i);
+                hasil += "\n";
             } else if (status[i] == 1) {
                 //terikat
-                System.out.printf("x%d = ", i);
+                hasil += String.format("x%d = ", i);
                 boolean pertama = true;
                 //Print ax^n + bx^(n-1) + cx^(n-2) ... + dx
                 for (int j = 0; j < this.banyakVariable; j++) {
@@ -169,18 +185,18 @@ public class MatrixParametrik extends Matrix {
                         if (nilai > 0) {
                             //positif
                             if (pertama) {
-                                System.out.printf("(%.2f * x%d)", nilai, j);
+                                hasil += String.format("(%.2f * x%d)", nilai, j);
                                 pertama = false;
                             } else {
-                                System.out.printf(" + (%.2f * x%d)", nilai, j);
+                                hasil += String.format(" + (%.2f * x%d)", nilai, j);
                             }
                         } else {
                             //negatif
                             if (pertama) {
-                                System.out.printf("(-%.2f * x%d)", -1 * nilai, j);
+                                hasil += String.format("(-%.2f * x%d)", -1 * nilai, j);
                                 pertama = false;
                             } else {
-                                System.out.printf(" - (-%.2f * x%d)", -1 * nilai, j);
+                                hasil += String.format(" - (-%.2f * x%d)", -1 * nilai, j);
                             }
                         }
                     }
@@ -191,27 +207,34 @@ public class MatrixParametrik extends Matrix {
                     if (koefHasil > 0) {
                         //positif
                         if (pertama) {
-                            System.out.printf("%.2f", koefHasil);
+                            hasil += String.format("%.2f", koefHasil);
                             pertama = false;
                         } else {
-                            System.out.printf(" + %.2f", koefHasil);
+                            hasil += String.format(" + %.2f", koefHasil);
                         }
                     } else {
                         //negatif
                         if (pertama) {
-                            System.out.printf("-%.2f", -1 * koefHasil);
+                            hasil += String.format("-%.2f", -1 * koefHasil);
                             pertama = false;
                         } else {
-                            System.out.printf(" - %.2f", -1 * koefHasil);
+                            hasil += String.format(" - %.2f", -1 * koefHasil);
                         }
                     }
                 }
-                System.out.println();
+                hasil += "\n";
             } else if (status[i] == 2) {
                 //tentu
-                System.out.printf("x%d = %.2f", i, this.hasilParametrik[i][banyakVariable]);
-                System.out.println();
+                hasil += String.format("x%d = %.2f", i, this.hasilParametrik[i][banyakVariable]);
+                hasil += "\n";
             }
+        }
+        if (isGui) {
+            panel.removeAll();
+            panel.add(new JLabel("Hasil Parametrik : "),BorderLayout.NORTH);
+            panel.add(new JTextArea(hasil),BorderLayout.CENTER);
+        } else {
+            System.out.println(hasil);
         }
     }
 
