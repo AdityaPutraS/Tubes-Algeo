@@ -1,6 +1,7 @@
 package tubes.matrix;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MatrixInterpolasi extends Matrix {
 
@@ -144,19 +145,25 @@ public class MatrixInterpolasi extends Matrix {
         }
         hasil += "\n";
         if(isGui){
-
+            panel.removeAll();
+            panel.add(new JLabel("Polynomial : "), BorderLayout.NORTH);
+            panel.add(new JTextArea(hasil), BorderLayout.CENTER);
         }else{
-
+            System.out.println(hasil);
         }
     }
 
-    public void printHasilInterpolasi(double x,boolean isGui, JPanel panel){
+    public void printHasilInterpolasi(double x,boolean isGui, JLabel label){
         double sum=0;
         for(int i=0;i<this.getnBrs();i++){
             sum+=this.data[i][this.getnKol()-1]*(double)Math.pow((double)x,(double)(this.getnBrs()-1-i));
         }
-        System.out.printf("f(%.2f)=%f",x,sum);
-        System.out.println();
+        String hasil = String.format("f(%.2f)=%f", x, sum);
+        if(isGui){
+            label.setText(hasil);
+        }else {
+            System.out.println(hasil);
+        }
     }
 
 

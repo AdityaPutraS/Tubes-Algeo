@@ -1,3 +1,5 @@
+import jdk.nashorn.internal.scripts.JO;
+import tubes.error.NoSolution;
 import tubes.matrix.Matrix;
 import tubes.matrix.MatrixInterpolasi;
 import tubes.matrix.MatrixParametrik;
@@ -19,8 +21,12 @@ public class GUI {
     private JPanel SPL, Interpolasi;
     private JPanel panelMatrixSPL = new JPanel(new BorderLayout());
     private JPanel panelMatrixInter = new JPanel(new BorderLayout());
-    private JPanel panelHasilSPL, panelHasilInter;
-    //Spineer
+    private JPanel panelHasilSPL, panelHasilInter, panelHasilPoly;
+    //Label
+    private JLabel labelPoly;
+    //Text Field
+    private JTextField xPoly;
+    //Spinner
     private JSpinner baris, kolom, titik;
     //Tabel
     private JTable tabelMatrixSPL, tabelMatrixInter;
@@ -87,6 +93,7 @@ public class GUI {
             c.gridy = 7;
             c.fill = GridBagConstraints.NONE;
             this.SPL.add(this.panelMatrixSPL, c);
+            this.panelHasilSPL.removeAll();
         } else {
             //Ambil nilai dari spinner
             try {
@@ -115,6 +122,7 @@ public class GUI {
             c.gridy = 3;
             c.fill = GridBagConstraints.NONE;
             this.Interpolasi.add(this.panelMatrixInter, c);
+            this.panelHasilInter.removeAll();
         }
 
         this.f.pack();
@@ -128,24 +136,32 @@ public class GUI {
                 //Solusi Gauss
                 MatrixParametrik M = new MatrixParametrik(this.tabelMatrixSPL, this.barisSPL, this.kolomSPL);
                 M.gauss();
-                M.genStatus();
-                M.solveParametrikGauss();
-                M.printHasilParametrik(true,this.panelHasilSPL);
-                c.gridx = 0;
-                c.gridy = 9;
-                this.SPL.add(panelHasilSPL,c);
+                try {
+                    M.genStatus();
+                    M.solveParametrikGauss();
+                    M.printHasilParametrik(true, this.panelHasilSPL);
+                    c.gridx = 0;
+                    c.gridy = 9;
+                    this.SPL.add(panelHasilSPL, c);
+                } catch (NoSolution e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
             } else if (this.gaussJordan.isSelected()) {
                 //Solusi Gauss Jordan
                 MatrixParametrik M = new MatrixParametrik(this.tabelMatrixSPL, this.barisSPL, this.kolomSPL);
                 M.gaussJordan();
-                M.genStatus();
-                M.solveParametrikGaussJordan();
-                M.printHasilParametrik(true,this.panelHasilSPL);
-                c.gridx = 0;
-                c.gridy = 9;
-                this.SPL.add(panelHasilSPL,c);
+                try {
+                    M.genStatus();
+                    M.solveParametrikGaussJordan();
+                    M.printHasilParametrik(true, this.panelHasilSPL);
+                    c.gridx = 0;
+                    c.gridy = 9;
+                    this.SPL.add(panelHasilSPL, c);
+                } catch (NoSolution e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
             } else {
-                //TODO : error windows pilih metode terlebih dahulu
+                JOptionPane.showMessageDialog(null,"Pilih metode terlebih dahulu");
             }
         } else {
             //Interpolasi
@@ -154,8 +170,23 @@ public class GUI {
             //Cek apakah valid
             if (M.titikValid()) {
                 //Valid, output ke textbox
+                M.printSolusiInterpolasi(true,this.panelHasilInter);
+                this.panelHasilPoly = new JPanel(new BorderLayout());
+                this.panelHasilPoly.add(new JLabel("x = "),BorderLayout.WEST);
+                xPoly = new JTextField();
+                labelPoly = new JLabel("f(x) = ");
+                xPoly.addActionListener(e -> M.printHasilInterpolasi(Double.valueOf(xPoly.getText()),
+                                                                    true,
+                                                                    labelPoly) );
+                this.panelHasilPoly.add(labelPoly,BorderLayout.SOUTH);
+                this.panelHasilPoly.add(xPoly,BorderLayout.CENTER);
+                this.panelHasilInter.add(this.panelHasilPoly,BorderLayout.SOUTH);
+                c.gridx = 0;
+                c.gridy = 5;
+                this.Interpolasi.add(panelHasilInter, c);
             } else {
                 //Tidak Valid
+                JOptionPane.showMessageDialog(null,"Titik tidak valid");
             }
         }
         this.f.pack();
