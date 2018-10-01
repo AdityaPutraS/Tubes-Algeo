@@ -14,9 +14,10 @@ public class External {
     }
 
     public void cekSimpan(){
+        //cek apakah user mau simpan hasil atau tidak
         Scanner input=new Scanner(System.in);
         boolean stop=false;
-        System.out.println("Apakah anda ingin menyimpan hasilnya?\n<ya/tidak> : ");
+        System.out.printf("Apakah anda ingin menyimpan hasilnya?\n<ya/tidak> : ");
         do {
             String s=input.nextLine();
             if(s.equals("ya")||s.equals("tidak")){
@@ -33,12 +34,14 @@ public class External {
     }
 
     public void namaExternal(){
+        //minta nama file external ke user
         Scanner input=new Scanner(System.in);
         System.out.print("Masukkan nama file : ");
         fileName="data_save/"+input.nextLine()+".txt";
     }
 
     public void saveExternal(String judul,Matrix M){
+        //save external berupa suatu string judul diikuti matrix
         if(simpan) {
             try {
                 File file = new File(fileName);
@@ -65,6 +68,7 @@ public class External {
     }
 
     public void saveExternal(String s){
+        //save external berupa string
         if(simpan) {
             try {
                 File file = new File(fileName);

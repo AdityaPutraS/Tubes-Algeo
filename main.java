@@ -3,7 +3,6 @@ import tubes.matrix.MatrixInterpolasi;
 import tubes.matrix.MatrixParametrik;
 import tubes.consolecapturer.ConsoleOutputCapturer;
 import tubes.fileexternal.External;
-
 import java.util.*;
 
 public class main {
@@ -17,7 +16,7 @@ public class main {
         String consoleView;
         do {
             System.out.println("Menu Utama : ");
-            System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Keluar\n4. Test File\n");
+            System.out.printf("1. Sistem Persamaan Linier\n2. Interpolasi Polinom\n3. Test File\n4. Keluar\n");
             inputLuar = input.next().charAt(0);
             if (inputLuar == '1') {
                 System.out.println("Pilihan : ");
@@ -29,7 +28,7 @@ public class main {
                 }
                 System.out.print("Banyak persamaan : ");
                 baris = input.nextInt();
-                System.out.print("Banyak variable : ");
+                System.out.print("Banyak variabel : ");
                 kolom = input.nextInt();
                 System.out.println("Masukkan persamaan : ");
                 MatrixParametrik M = new MatrixParametrik(baris, kolom + 1);
@@ -43,7 +42,6 @@ public class main {
                     M.printMatrix();
                     M.genStatus();
                     M.solveParametrikGauss();
-
                 } else if (inputDalam == '2') {
                     M.gaussJordan();
                     System.out.println("Matrix hasil Gauss Jordan :");
@@ -92,14 +90,13 @@ public class main {
                 if(external.simpanStatus()){
                     external.saveExternal(consoleView);
                 }
-
-            } else if (inputLuar == '4') {
+            } else if (inputLuar == '3') {
                 Matrix m = new Matrix(2, 3);
                 m.bacaMatrixFile("temp.txt");
                 m.printMatrix();
+            }else if(inputLuar!='4'){
+                System.out.println("Input salah. Ulangi.");
             }
-
-        } while (inputLuar != '3');
-
+        } while (inputLuar != '4');
     }
 }

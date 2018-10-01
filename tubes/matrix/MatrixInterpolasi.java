@@ -8,6 +8,7 @@ public class MatrixInterpolasi extends Matrix {
 
     public static double fastPangkat(double base, int pangkat)
     {
+        //metode pemangkatan agar kalkulasi cepat
         double kuadrat = base * base, hasil;
         if(pangkat % 2 == 1)
         {
@@ -28,10 +29,10 @@ public class MatrixInterpolasi extends Matrix {
     }
 
     public void titikMatrix(double[][] matrixTitik){
+        //memasukkan kumpulan titik ke matrix interpolasi
         int i,j;
         for (i=0;i<this.nBrs;i++){
             for(j=0;j<this.nKol-1;j++){
-                //this.data[i][j]=(double)Math.pow((double)matrixTitik[i][0],(double)this.nKol-j-2);
                 this.data[i][j] = fastPangkat(matrixTitik[i][0],this.nKol-j-2);
             }
             this.data[i][j]=matrixTitik[i][1];
@@ -39,6 +40,7 @@ public class MatrixInterpolasi extends Matrix {
     }
 
     public boolean titikValid(){
+        //cek apakah ada dua titik yang punya nilai  x sama tapi y berbeda
         int i,j;
         Matrix temp=new Matrix(this.getnBrs(),this.getnBrs());
         for(i=0;i<this.getnBrs();i++){
@@ -58,10 +60,8 @@ public class MatrixInterpolasi extends Matrix {
         return valid;
     }
 
-
-    //Gauss Jordan
     public void printSolusiInterpolasi(){
-        //Asumsi tubes.matrix.Matrix sudah di Gauss Jordan
+        //Asumsi matri sudah di Gauss Jordan
         System.out.printf("Solusi :\nf(x)=");
         int i;
         for(i=0;i<this.getnBrs()-1;i++){
@@ -71,50 +71,50 @@ public class MatrixInterpolasi extends Matrix {
                     if(this.data[i][this.getnKol()-1]>0) {
                         if(this.data[i][this.getnKol()-1]!=1){
                             if(pangkat!=1){
-                                System.out.printf("+%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
+                                System.out.printf("+%.2fx^%d ",this.data[i][this.getnKol() - 1],pangkat);
                             }else{
-                                System.out.printf("+%.2fx",this.data[i][this.getnKol() - 1]);
+                                System.out.printf("+%.2fx ",this.data[i][this.getnKol() - 1]);
                             }
                         }else{
                             if(pangkat!=1){
-                                System.out.printf("+x^%d",pangkat);
+                                System.out.printf("+x^%d ",pangkat);
                             }else{
-                                System.out.printf("+x");
+                                System.out.printf("+x ");
                             }
                         }
                     }else {
                         if (this.data[i][this.getnKol() - 1] != -1) {
                             if(pangkat!=1){
-                                System.out.printf("%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
+                                System.out.printf("%.2fx^%d ",this.data[i][this.getnKol() - 1],pangkat);
                             }else{
-                                System.out.printf("%.2fx",this.data[i][this.getnKol() - 1]);
+                                System.out.printf("%.2fx ",this.data[i][this.getnKol() - 1]);
                             }
                         } else {
                             if(pangkat!=1){
-                                System.out.printf("-x^%d",pangkat);
+                                System.out.printf("-x^% d",pangkat);
                             }else{
-                                System.out.printf("-x");
+                                System.out.printf("-x ");
                             }
                         }
                     }
                 }else{
                     if(this.data[i][this.getnKol()-1]!=1&&this.data[i][this.getnKol()-1]!=-1){
                         if(pangkat!=1){
-                            System.out.printf("%.2fx^%d",this.data[i][this.getnKol() - 1],pangkat);
+                            System.out.printf("%.2fx^%d ",this.data[i][this.getnKol() - 1],pangkat);
                         }else{
-                            System.out.printf("%.2fx",this.data[i][this.getnKol() - 1]);
+                            System.out.printf("%.2fx ",this.data[i][this.getnKol() - 1]);
                         }
                     }else if(this.data[i][this.getnKol()-1]==1){
                         if(pangkat!=1){
-                            System.out.printf("x^%d",pangkat);
+                            System.out.printf("x^%d ",pangkat);
                         }else{
-                            System.out.printf("x");
+                            System.out.printf("x ");
                         }
                     }else{
                         if(pangkat==-1){
-                            System.out.printf("-x^%d",pangkat);
+                            System.out.printf("-x^%d ",pangkat);
                         }else{
-                            System.out.printf("-x");
+                            System.out.printf("-x ");
                         }
                     }
                 }
@@ -131,6 +131,7 @@ public class MatrixInterpolasi extends Matrix {
     }
 
     public void printHasilInterpolasi(double x){
+        //print hasil interpolasi
         double sum=0;
         for(int i=0;i<this.getnBrs();i++){
             sum+=this.data[i][this.getnKol()-1]*(double)Math.pow((double)x,(double)(this.getnBrs()-1-i));
