@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.ParseException;
 
 public class GUI {
     private final int minBaris = 2, minKolom = 2;
@@ -7,11 +8,15 @@ public class GUI {
     private JFrame f;
     private JTabbedPane tabPane;
     //Panel
-    private JPanel SPL,Interpolasi;
+    private JPanel SPL, Interpolasi;
     private JPanel panelMatrixSPL = new JPanel(new BorderLayout());
     private JPanel panelMatrixInter = new JPanel(new BorderLayout());
+    private JPanel panelHasilSPL, panelHasilInter;
     //Spineer
-    private JSpinner baris,kolom,titik;
+    private JSpinner baris, kolom, titik;
+    //Tabel
+    private JTable tabelMatrixSPL, tabelMatrixInter;
+
     //Konstruktor
     public GUI(int lebar, int tinggi) {
         this.f = new JFrame();
@@ -31,77 +36,88 @@ public class GUI {
         this.tabPane = new JTabbedPane();
         TabPersamaanLinier();
         TabInterpolasi();
-        TabGauss();
-        TabGaussJordan();
         this.f.add(tabPane, BorderLayout.NORTH);
     }
 
-    private void initTabel(GridBagConstraints c, boolean isSPL){
-        int bar,kol;
-        if(isSPL){
+    private void initTabel(GridBagConstraints c, boolean isSPL) {
+        int bar, kol;
+        if (isSPL) {
             //Ambil nilai dari spinner
             try {
                 this.baris.commitEdit();
-            } catch ( java.text.ParseException e ) {
+            } catch (ParseException e) {
                 System.out.println("Nilai baris tidak valid");
             }
             bar = (Integer) this.baris.getValue();
             try {
                 this.kolom.commitEdit();
-            } catch ( java.text.ParseException e ) {
+            } catch (ParseException e) {
                 System.out.println("Nilai kolom tidak valid");
             }
             kol = (Integer) this.kolom.getValue();
-        }else{
+            String[] variable = new String[kol];
+            if (isSPL || kol > 2) {
+                for (int i = 0; i < kol - 1; i++) {
+                    variable[i] = "x" + i;
+                }
+                variable[kol - 1] = "Hasil";
+            } else {
+                variable[0] = "x";
+                variable[1] = "y";
+            }
+            Object[][] data = new Object[bar][kol];
+            for (int i = 0; i < bar; i++) {
+                for (int j = 0; j < kol; j++) {
+                    data[i][j] = new Integer(0);
+                }
+            }
+            this.tabelMatrixSPL = new JTable(data, variable);
+            //Atur ukuran
+            for (int i = 0; i < kol; i++) {
+                this.tabelMatrixSPL.getColumnModel().getColumn(i).setPreferredWidth(50);
+            }
+            this.panelMatrixSPL.removeAll();
+            this.panelMatrixSPL.add(this.tabelMatrixSPL.getTableHeader(), BorderLayout.NORTH);
+            this.panelMatrixSPL.add(this.tabelMatrixSPL, BorderLayout.CENTER);
+            c.gridx = 0;
+            c.gridy = 7;
+            c.fill = GridBagConstraints.NONE;
+            this.SPL.add(this.panelMatrixSPL, c);
+        } else {
             //Ambil nilai dari spinner
             try {
                 this.titik.commitEdit();
-            } catch ( java.text.ParseException e ) {
+            } catch (ParseException e) {
                 System.out.println("Nilai baris tidak valid");
             }
             bar = (Integer) this.titik.getValue();
             kol = 2;
-        }
-        String[] variable = new String[kol];
-        if(isSPL || kol > 2) {
-            for (int i = 0; i < kol - 1; i++) {
-                variable[i] = "x" + i;
+            String[] variable = {"x", "y"};
+            Object[][] data = new Object[bar][kol];
+            for (int i = 0; i < bar; i++) {
+                for (int j = 0; j < kol; j++) {
+                    data[i][j] = new Integer(0);
+                }
             }
-            variable[kol - 1] = "Hasil";
-        }else{
-            variable[0] = "x";
-            variable[1] = "y";
-        }
-        Object[][] data = new Object[bar][kol];
-        for (int i = 0; i < bar; i++) {
-            for (int j = 0; j < kol; j++) {
-                data[i][j] = new Integer(0);
+            this.tabelMatrixInter = new JTable(data, variable);
+            //Atur ukuran
+            for (int i = 0; i < kol; i++) {
+                this.tabelMatrixInter.getColumnModel().getColumn(i).setPreferredWidth(50);
             }
-        }
-        JTable tabelMatrix = new JTable(data,variable);
-        //Atur ukuran
-        for (int i = 0; i < kol; i++) {
-            tabelMatrix.getColumnModel().getColumn(i).setPreferredWidth(50);
-        }
-        if(isSPL) {
-            this.panelMatrixSPL.removeAll();
-            this.panelMatrixSPL.add(tabelMatrix.getTableHeader(), BorderLayout.NORTH);
-            this.panelMatrixSPL.add(tabelMatrix, BorderLayout.CENTER);
-            c.gridx = 0;
-            c.gridy = 7;
-            c.fill = GridBagConstraints.NONE;
-            this.SPL.add(this.panelMatrixSPL,c);
-        }else{
             this.panelMatrixInter.removeAll();
-            this.panelMatrixInter.add(tabelMatrix.getTableHeader(), BorderLayout.NORTH);
-            this.panelMatrixInter.add(tabelMatrix, BorderLayout.CENTER);
+            this.panelMatrixInter.add(this.tabelMatrixInter.getTableHeader(), BorderLayout.NORTH);
+            this.panelMatrixInter.add(this.tabelMatrixInter, BorderLayout.CENTER);
             c.gridx = 0;
             c.gridy = 6;
             c.fill = GridBagConstraints.NONE;
-            this.Interpolasi.add(this.panelMatrixInter,c);
+            this.Interpolasi.add(this.panelMatrixInter, c);
         }
 
         this.f.pack();
+    }
+
+    private void hitungSolusi(GridBagConstraints c, boolean isSPL) {
+
     }
 
     private void TabPersamaanLinier() {
@@ -159,7 +175,7 @@ public class GUI {
         c.gridx = 0;
         c.gridy = 5;
         c.weighty = 1;
-        this.SPL.add(buatMatrix,c);
+        this.SPL.add(buatMatrix, c);
         //Isi Separator
         JSeparator pemisah2 = new JSeparator(SwingConstants.HORIZONTAL);
         pemisah2.setPreferredSize(new Dimension(4, 1));
@@ -171,7 +187,15 @@ public class GUI {
         c.gridwidth = 4;
         this.SPL.add(pemisah2, c);
         //Matrix
-        buatMatrix.addActionListener(e -> this.initTabel(c,true));
+        buatMatrix.addActionListener(e -> this.initTabel(c, true));
+        //Tombol untuk hitung hasil spl
+        JButton hasilSPL = new JButton("Hitung Solusi");
+        c.gridx = 0;
+        c.gridy = 8;
+        this.SPL.add(hasilSPL, c);
+        //Hasil SPL
+        this.panelHasilSPL = new JPanel(new BorderLayout());
+        hasilSPL.addActionListener(e -> this.hitungSolusi(c, true));
     }
 
     private void TabInterpolasi() {
@@ -219,7 +243,7 @@ public class GUI {
         c.gridx = 0;
         c.gridy = 4;
         c.weighty = 1;
-        this.Interpolasi.add(buatMatrix,c);
+        this.Interpolasi.add(buatMatrix, c);
         //Isi Separator
         JSeparator pemisah2 = new JSeparator(SwingConstants.HORIZONTAL);
         pemisah2.setPreferredSize(new Dimension(4, 1));
@@ -231,16 +255,15 @@ public class GUI {
         c.gridwidth = 4;
         this.Interpolasi.add(pemisah2, c);
         //Matrix
-        buatMatrix.addActionListener(e -> this.initTabel(c,false));
+        buatMatrix.addActionListener(e -> this.initTabel(c, false));
+        //Tombol untuk hitung hasil interpolasi
+        JButton hasilInter = new JButton("Interpolasi Polynomial");
+        c.gridx = 0;
+        c.gridy = 8;
+        this.Interpolasi.add(hasilInter, c);
+        //Hasil SPL
+        this.panelHasilInter = new JPanel(new BorderLayout());
+        hasilInter.addActionListener(e -> this.hitungSolusi(c, false));
     }
 
-    private void TabGauss() {
-        JPanel Gauss = new JPanel();
-        this.tabPane.addTab("Gauss", null, Gauss, "Metode Gauss");
-    }
-
-    private void TabGaussJordan() {
-        JPanel GaussJordan = new JPanel();
-        this.tabPane.addTab("Gauss-Jordan", null, GaussJordan, "Metode Gauss-Jordan");
-    }
 }
