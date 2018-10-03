@@ -11,6 +11,7 @@ public class MatrixInterpolasi extends Matrix {
 
     public MatrixInterpolasi(JTable tabel, int baris, int kolom)
     {
+        //Konstruktor khusus untuk gui
         super(baris,kolom);
         double[][] matTitik = new double[baris][2];
         for (int i = 0; i < baris; i++) {
@@ -43,6 +44,7 @@ public class MatrixInterpolasi extends Matrix {
     }
 
     public void titikMatrix(double[][] matrixTitik){
+        //Membuat matrix dari titik yang diinput
         int i,j;
         for (i=0;i<this.nBrs;i++){
             for(j=0;j<this.nKol-1;j++){
@@ -54,6 +56,7 @@ public class MatrixInterpolasi extends Matrix {
     }
 
     public boolean titikValid(){
+        //Mengecek apakah titik valid dengan mengecek apakah ada 2 titik yang sama
         int i,j;
         Matrix temp=new Matrix(this.getnBrs(),this.getnBrs());
         for(i=0;i<this.getnBrs();i++){
@@ -75,7 +78,7 @@ public class MatrixInterpolasi extends Matrix {
 
 
     //Gauss Jordan
-    public void printSolusiInterpolasi(boolean isGui, JPanel panel){
+    public String printSolusiInterpolasi(){
         //Asumsi tubes.matrix.Matrix sudah di Gauss Jordan
         String hasil = "";
         hasil += String.format("Solusi :\nf(x)=");
@@ -144,13 +147,7 @@ public class MatrixInterpolasi extends Matrix {
             }
         }
         hasil += "\n";
-        if(isGui){
-            panel.removeAll();
-            panel.add(new JLabel("Polynomial : "), BorderLayout.NORTH);
-            panel.add(new JTextArea(hasil), BorderLayout.CENTER);
-        }else{
-            System.out.println(hasil);
-        }
+        return hasil;
     }
 
     public void printHasilInterpolasi(double x,boolean isGui, JLabel label){

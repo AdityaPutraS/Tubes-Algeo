@@ -27,17 +27,19 @@ public class MatrixParametrik extends Matrix {
     */
 
     private int[] status;
-    private int banyakVariable = this.nKol - 1;
+    private int banyakVariable;
 
     //Konstruktor
     public MatrixParametrik(int baris, int kolom) {
         super(baris, kolom);
+        this.banyakVariable = this.nKol - 1;
         this.hasilParametrik = new double[banyakVariable][banyakVariable + 1];
         this.status = new int[banyakVariable];
     }
 
     public MatrixParametrik(JTable tabel, int baris, int kolom) {
         super(baris, kolom);
+        this.banyakVariable = this.nKol - 1;
         this.hasilParametrik = new double[banyakVariable][banyakVariable + 1];
         this.status = new int[banyakVariable];
         for (int i = 0; i < baris; i++) {
@@ -165,7 +167,7 @@ public class MatrixParametrik extends Matrix {
     }
 
 
-    public void printHasilParametrik(boolean isGui, JPanel panel) {
+    public String printHasilParametrik() {
         //Dipanggil setelah solveParametrikGauss() atau solveParametrikGaussJordan()
         String hasil = "";
         for (int i = 0; i < this.banyakVariable; i++) {
@@ -229,13 +231,7 @@ public class MatrixParametrik extends Matrix {
                 hasil += "\n";
             }
         }
-        if (isGui) {
-            panel.removeAll();
-            panel.add(new JLabel("Hasil Parametrik : "),BorderLayout.NORTH);
-            panel.add(new JTextArea(hasil),BorderLayout.CENTER);
-        } else {
-            System.out.println(hasil);
-        }
+        return hasil;
     }
 
 }

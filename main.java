@@ -57,7 +57,8 @@ public class main {
                     M.solveParametrikGaussJordan();
                 }
                 System.out.println("Solusi Persamaan Linier : ");
-                M.printHasilParametrik(false, null);
+                String hasil = M.printHasilParametrik();
+                System.out.println(hasil);
                 consoleView=capture.stop();
                 if(external.simpanStatus()){
                     external.saveExternal(consoleView);
@@ -82,7 +83,8 @@ public class main {
                 M.gaussJordan();
                 if (M.titikValid()) {
                     capture.start();
-                    M.printSolusiInterpolasi(false,null);
+                    String hasil = M.printSolusiInterpolasi();
+                    System.out.println(hasil);
                     consoleView=capture.stop();
                     System.out.print("Masukkan nilai x yang akan diinterpolasi : ");
                     double x = input.nextDouble();
