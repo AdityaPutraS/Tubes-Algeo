@@ -40,44 +40,6 @@ public class Matrix {
         }
     }
 
-    public void bacaMatrixFile(String namaFile) {
-        File fileExternal;
-        int baris = -1, kolom = -1;
-        ArrayList<ArrayList<Double>> temp = new ArrayList<ArrayList<Double>>();
-        try {
-            fileExternal = new File(namaFile);
-            Scanner scanBaris = new Scanner(fileExternal);
-            while (scanBaris.hasNextLine()) {
-                baris += 1;
-                temp.add(new ArrayList<Double>());
-                String s = scanBaris.nextLine();
-                Scanner scanDouble = new Scanner(s);
-                while (scanDouble.hasNextDouble()) {
-                    Double f = scanDouble.nextDouble();
-                    temp.get(baris).add(f);
-                }
-            }
-            kolom = temp.get(0).size();
-            baris += 1; //harus di +1 karena baris tadi digunakan untuk mengindex, bukan untuk menghitung banyak baris
-            //Buat matrixnya, jika baris & kolom != -1
-            if (baris != -1 && kolom != -1) {
-                this.data = new double[temp.size()][temp.get(0).size()];
-                for (int i = 0; i < baris; i++) {
-                    for (int j = 0; j < kolom; j++) {
-                        this.data[i][j] = temp.get(i).get(j);
-                    }
-                }
-                this.nBrs = baris;
-                this.nKol = kolom;
-            } else {
-                System.out.println("File kosong");
-            }
-        } catch (Exception e) {
-            System.out.println("Error : " + e);
-        }
-
-    }
-
     public void printMatrix() {
         for (int i = 0; i < this.nBrs; i++) {
             for (int j = 0; j < this.nKol; j++) {

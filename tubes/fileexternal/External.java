@@ -1,16 +1,81 @@
 package tubes.fileexternal;
 
-import tubes.matrix.Matrix;
+import tubes.matrix.*;
 import java.io.*;
 import java.util.Scanner;
 import java.io.File;
+import java.util.ArrayList;
 
 public class External {
     private String fileName;
     private Boolean simpan;
+    private Boolean load;
 
     public Boolean simpanStatus(){
         return this.simpan;
+    }
+    public Boolean loadStatus(){
+        return this.load;
+    }
+    
+    public MatrixParametrik bacaMatrixFile(String namaFile) {
+        File fileExternal;
+        MatrixParametrik M= new MatrixParametrik(1,1);;
+        int baris = -1, kolom = -1;
+        ArrayList<ArrayList<Double>> temp = new ArrayList<ArrayList<Double>>();
+        try {
+            fileExternal = new File(namaFile);
+            Scanner scanBaris = new Scanner(fileExternal);
+            while (scanBaris.hasNextLine()) {
+                baris += 1;
+                temp.add(new ArrayList<Double>());
+                String s = scanBaris.nextLine();
+                Scanner scanDouble = new Scanner(s);
+                while (scanDouble.hasNextDouble()) {
+                    Double f = scanDouble.nextDouble();
+                    temp.get(baris).add(f);
+                }
+            }
+            kolom = temp.get(0).size();
+            baris += 1; //harus di +1 karena baris tadi digunakan untuk mengindex, bukan untuk menghitung banyak baris
+            //Buat matrixnya, jika baris & kolom != -1
+
+            if (baris != -1 && kolom != -1) {
+                M = new MatrixParametrik(baris,kolom);
+                for (int i = 0; i < baris; i++) {
+                    for (int j = 0; j < kolom; j++) {
+                        M.data[i][j] = temp.get(i).get(j);
+                    }
+                }
+            } else {
+                System.out.println("File kosong");
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }finally{
+            return M;
+        }
+        
+    }
+
+    public void cekLoad(){
+        Scanner input=new Scanner(System.in);
+        boolean stop=false;
+        System.out.println("Apakah anda ingin mengeload file eksternal\n<ya/tidak> : ");
+        do {
+            String s=input.nextLine();
+            if(s.equals("ya")||s.equals("tidak")){
+                if(s.equals("ya")) {
+                    load = true;
+                } else{
+                    load=false;
+                }
+                stop=true;
+            }else{
+                System.out.println("Input anda salah. Ulangi.");
+            }
+        }while(!stop);
     }
 
     public void cekSimpan(){
@@ -81,4 +146,6 @@ public class External {
             }
         }
     }
+
+ 
 }

@@ -16,15 +16,15 @@ public class main {
         int baris, kolom;
         String consoleView;
         do {
-            System.out.println("Menu Utama : ");
+            System.out.printf("\nSPL SOLVER DAN INTERPOLASI POLINOM\n\nMenu Utama :\n");
             System.out.printf(
                     "1. Sistem Persamaan Linier\n" +
                     "2. Interpolasi Polinom\n" +
-                    "3. Keluar\n" +
-                    "4. Test File\n" +
-                    "5. GUI\n");
+                    "3. GUI\n" +
+                    "4. Keluar\n");
             inputLuar = input.next().charAt(0);
             if (inputLuar == '1') {
+                MatrixParametrik M;
                 System.out.println("Pilihan : ");
                 System.out.printf("1. Metode Gauss\n2. Metode Gauss Jordan\n");
                 inputDalam = input.next().charAt(0);
@@ -32,13 +32,18 @@ public class main {
                 if(external.simpanStatus()){
                     external.namaExternal();
                 }
-                System.out.print("Banyak persamaan : ");
-                baris = input.nextInt();
-                System.out.print("Banyak variable : ");
-                kolom = input.nextInt();
-                System.out.println("Masukkan persamaan : ");
-                MatrixParametrik M = new MatrixParametrik(baris, kolom + 1);
-                M.bacaMatrix();
+                external.cekLoad();
+                if(external.loadStatus()){
+                    M=external.bacaMatrixFile("data_input/file_external.txt");
+                }else{
+                    System.out.print("Banyak persamaan : ");
+                    baris = input.nextInt();
+                    System.out.print("Banyak variable : ");
+                    kolom = input.nextInt();
+                    System.out.println("Masukkan persamaan : ");
+                    M = new MatrixParametrik(baris, kolom + 1);
+                    M.bacaMatrix();
+                }
                 capture.start();
                 System.out.println("Matrix persamaan :");
                 M.printMatrix();
@@ -99,16 +104,11 @@ public class main {
                 if(external.simpanStatus()){
                     external.saveExternal(consoleView);
                 }
-
-            } else if (inputLuar == '4') {
-                Matrix m = new Matrix(2, 3);
-                m.bacaMatrixFile("temp.txt");
-                m.printMatrix();
-            } else if(inputLuar == '5') {
+            } else if(inputLuar == '3') {
                 GUI gui = new GUI(500,500);
             }
 
-        } while (inputLuar != '3');
+        } while (inputLuar != '4');
 
     }
 }
