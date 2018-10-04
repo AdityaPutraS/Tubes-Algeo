@@ -121,18 +121,18 @@ Jika anda memilih untuk tidak membuka file eksternal, anda harus memasukkan bany
     f(7.20)=2.900800
 
 ### GUI atau Graphical User Interface
-Selain menjalankan file dari terminal, program ini juga dilengkapi dengan GUI interaktif sehingga anda lebih mudah menggunakannya. Untuk membuka GUI, dari menu utama ketikkan 3.
-<img src="Image/gui.PNG">
-Maka GUI akan tampak seperti gambar di atas. Di GUI, anda dapat memilih apakah ingin menyelesaikan persamaan linier atau interpolasi polinom. 
-<img src="Image/gui2.PNG">
-Jika anda ingin menyelesaikan persamaan linier, maka pilih metodenya, masukkan banyak baris dan kolom, kemudian tekan tombol Buat Matrix. Setelah itu ketikkan persamaan dan tekan tombol Hitung Solusi.
-<img src="Image/gui3.PNG">
-Selain dengan mengetikkan persamaan, anda juga bisa membuka persamaan dari file eksternal dengan menekan tombol Buka File. Cari file dan pilih Open.
-<img src="Image/gui6.PNG">
-Solusi persamaan akan muncul. Anda dapat menyimpan solusi persamaan ini dengan menekan tombol Simpan File. Kemudian pilih tempat penyimpanan dan pilih Save.
-<img src="Image/gui5.PNG">
-Untuk interpolasi polinom, dengan cara yang sama anda perlu memasukkan banyak titik kemudian tekan tombol Buat Matrix. Setelah itu masukkan titik-titik yang akan diinterpolasi.
-<img src="Image/gui4.PNG">
+Selain menjalankan file dari terminal, program ini juga dilengkapi dengan GUI interaktif sehingga anda lebih mudah menggunakannya. Untuk membuka GUI, dari menu utama ketikkan 3.<br>
+<img src="Image/gui.PNG"><br>
+Maka GUI akan tampak seperti gambar di atas. Di GUI, anda dapat memilih apakah ingin menyelesaikan persamaan linier atau interpolasi polinom.<br>
+<img src="Image/gui2.PNG"><br>
+Jika anda ingin menyelesaikan persamaan linier, maka pilih metodenya, masukkan banyak baris dan kolom, kemudian tekan tombol Buat Matrix. Setelah itu ketikkan persamaan dan tekan tombol Hitung Solusi.<br>
+<img src="Image/gui3.PNG"><br>
+Selain dengan mengetikkan persamaan, anda juga bisa membuka persamaan dari file eksternal dengan menekan tombol Buka File. Cari file dan pilih Open.<br>
+<img src="Image/gui6.PNG"><br>
+Solusi persamaan akan muncul. Anda dapat menyimpan solusi persamaan ini dengan menekan tombol Simpan File. Kemudian pilih tempat penyimpanan dan pilih Save.<br>
+<img src="Image/gui5.PNG"><br>
+Untuk interpolasi polinom, dengan cara yang sama anda perlu memasukkan banyak titik kemudian tekan tombol Buat Matrix. Setelah itu masukkan titik-titik yang akan diinterpolasi.<br>
+<img src="Image/gui4.PNG"><br>
 Terakhir, tekan tombol Interpolasi Polynomial untuk menghitung solusi. Anda juga dapat menginterpolasi titik sembarang dengan memasukkan ke kotak yang disediakan.
 ## Kontributor
 Program dibuat untuk memenuhi salah satu Tugas Besar IF2123 Aljabar Geometri Teknik Informatika ITB. Adapun pembuat dari program ini adalah :
