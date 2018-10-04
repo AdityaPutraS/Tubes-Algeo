@@ -117,17 +117,17 @@ public class MatrixParametrik extends Matrix {
                 int idxLead = this.getLeadCoef(i);
                 for (int k = idxLead + 1; k < this.banyakVariable; k++) {
                     if (this.status[k] == 0) { //bebas
-                        this.hasilParametrik[idxLead][k] += -1 * this.data[i][k];
+                        this.hasilParametrik[idxLead][k] += (-1 * this.data[i][k])+0.0;
                     } else if (this.status[k] == 1) { //terikat
                         for (int j = 0; j < this.banyakVariable; j++) {
-                            this.hasilParametrik[idxLead][j] += (-1 * this.data[i][k] * this.hasilParametrik[k][j]);
+                            this.hasilParametrik[idxLead][j] += (-1 * this.data[i][k] * this.hasilParametrik[k][j])+0.0;
                         }
-                        this.hasilParametrik[idxLead][banyakVariable] += (-1 * this.data[i][k] * this.hasilParametrik[k][banyakVariable]);
+                        this.hasilParametrik[idxLead][banyakVariable] += (-1 * this.data[i][k] * this.hasilParametrik[k][banyakVariable])+0.0;
                     } else if (this.status[k] == 2) { //tentu
-                        this.hasilParametrik[idxLead][banyakVariable] += (-1 * this.data[i][k] * this.hasilParametrik[k][banyakVariable]);
+                        this.hasilParametrik[idxLead][banyakVariable] += (-1 * this.data[i][k] * this.hasilParametrik[k][banyakVariable])+0.0;
                     }
                 }
-                this.hasilParametrik[idxLead][banyakVariable] += this.data[i][this.nKol - 1];
+                this.hasilParametrik[idxLead][banyakVariable] += this.data[i][this.nKol - 1]+0.0;
             }
         }
     }
@@ -155,11 +155,11 @@ public class MatrixParametrik extends Matrix {
                 int idxLead = this.getLeadCoef(i);
                 if (status[idxLead] == 1) {
                     for (int k = idxLead + 1; k < banyakVariable; k++) {
-                        this.hasilParametrik[idxLead][k] += (-1 * this.data[i][k]);
+                        this.hasilParametrik[idxLead][k] += (-1 * this.data[i][k])+0.0;
                     }
-                    this.hasilParametrik[idxLead][banyakVariable] += this.data[i][this.nKol - 1];
+                    this.hasilParametrik[idxLead][banyakVariable] += this.data[i][this.nKol - 1]+0.0;
                 } else if (this.status[idxLead] == 2) {
-                    this.hasilParametrik[idxLead][banyakVariable] = this.data[i][this.nKol - 1];
+                    this.hasilParametrik[idxLead][banyakVariable] = this.data[i][this.nKol - 1]+0.0;
                 }
             }
         }
@@ -205,23 +205,28 @@ public class MatrixParametrik extends Matrix {
                 }
                 //Print koefisien fungsi
                 double koefHasil = this.hasilParametrik[i][banyakVariable];
-                if (koefHasil != 0) {
-                    if (koefHasil > 0) {
-                        //positif
-                        if (pertama) {
-                            hasil += String.format("%.2f", koefHasil);
-                            pertama = false;
-                        } else {
-                            hasil += String.format(" + %.2f", koefHasil);
-                        }
+                if (koefHasil == 0) {
+                    if (pertama) {
+                        hasil += "0.00";
+                        pertama = false;
                     } else {
-                        //negatif
-                        if (pertama) {
-                            hasil += String.format("-%.2f", -1 * koefHasil);
-                            pertama = false;
-                        } else {
-                            hasil += String.format(" - %.2f", -1 * koefHasil);
-                        }
+                        hasil += " + 0.00";
+                    }
+                }else if(koefHasil > 0){
+                    //positif
+                    if (pertama) {
+                        hasil += String.format("%.2f", koefHasil);
+                        pertama = false;
+                    } else {
+                        hasil += String.format(" + %.2f", koefHasil);
+                    }
+                } else {
+                    //negatif
+                    if (pertama) {
+                        hasil += String.format("-%.2f", -1 * koefHasil);
+                        pertama = false;
+                    } else {
+                        hasil += String.format(" - %.2f", -1 * koefHasil);
                     }
                 }
                 hasil += "\n";
