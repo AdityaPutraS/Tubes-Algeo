@@ -141,7 +141,7 @@ public class External {
     public void namaExternal(){
         Scanner input=new Scanner(System.in);
         System.out.print("Masukkan nama file : ");
-        fileName="test/data_save/"+input.nextLine()+".txt";
+        fileName="../test/data_save/"+input.nextLine()+".txt";
     }
 
     public void saveExternal(String judul,Matrix M){
